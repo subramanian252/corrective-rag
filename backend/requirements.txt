@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+jinja2
+python-dotenv
+langchain-core
+langchain-community
+langchain-openai
+langchain-text-splitters
+langchain-tavily
+langgraph
+faiss-cpu
+pypdf
