@@ -5,8 +5,9 @@ python-dotenv
 langchain-core
 langchain-community
 langchain-openai
+langchain-pinecone
 langchain-text-splitters
 langchain-tavily
 langgraph
-faiss-cpu
+pinecone
 pypdf
