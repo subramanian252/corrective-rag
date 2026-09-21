@@ -60,8 +60,7 @@ corrective-rag/
 |   |-- app/
 |   |   |-- __init__.py
 |   |   `-- graph.py
-|   |-- data/                 # Machine-learning PDF collection
-|   `-- requirements.txt
+|   `-- data/                 # Machine-learning PDF collection
 |-- frontend/
 |   |-- index.html
 |   |-- styles.css
@@ -70,12 +69,15 @@ corrective-rag/
 |   `-- crag.ipynb
 |-- .env
 |-- .gitignore
+|-- .python-version
+|-- requirements.txt
+|-- vercel.json
 `-- README.md
 ```
 
 ## Requirements
 
-- Python 3.10 or newer
+- Python 3.12
 - OpenRouter API key
 - Pinecone API key
 - Tavily API key
@@ -97,13 +99,24 @@ From the `corrective-rag` folder:
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
-pip install -r backend\requirements.txt
+pip install -r requirements.txt
 uvicorn app.main:api --reload
 ```
 
 Open `http://127.0.0.1:8000`.
 
 The graph is initialized when the first question is submitted. Creating and populating a new Pinecone index can make that first request take longer. Later requests reuse the initialized graph in the running process.
+
+## Deploy to Vercel
+
+This repository is structured for Vercel's FastAPI runtime:
+
+- `app/main.py` exports the FastAPI application as both `api` and `app`.
+- `requirements.txt` is at the repository root for dependency detection.
+- `.python-version` selects Python 3.12.
+- `vercel.json` allows the FastAPI function to run for up to 300 seconds.
+
+Before deploying, run this application locally once and confirm that the shared `agenticrag` Pinecone index has been created and populated. Import this repository as its own Vercel project, leave the build and output-directory settings empty, and configure `OPENROUTER_API_KEY`, `PINECONE_DB`, and `TAVILY_API_KEY` for Preview and Production. Do not upload or commit the local `.env` file.
 
 ## Notebook-to-application mapping
 
